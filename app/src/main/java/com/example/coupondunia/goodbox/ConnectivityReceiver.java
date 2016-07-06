@@ -10,11 +10,7 @@ public class ConnectivityReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		if(isOnline(context)) {
-			// Added a safe check because this receiver gets called multiple times at times in WiFi
-//			if(System.currentTimeMillis() - CDSharedPreferenceManager.getInstance().getLastOnlineConnectionTime() >= 2 * 60 * 1000) { // 2 minutes
-//				new UploadEventsReceiver().onReceive(context, intent);
-//				CDSharedPreferenceManager.getInstance().setLastOnlineConnectionTime(System.currentTimeMillis());
-//			}
+			//TODO to upload data from database when there is no internet connection and we save the sms to database
 		}
 	}
 

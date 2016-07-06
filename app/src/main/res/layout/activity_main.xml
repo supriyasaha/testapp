@@ -52,6 +52,22 @@
             android:maxLines="1"
             tools:text="supriya saha"
             android:textSize="16sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Enter URL"
+            android:textSize="13sp"/>
+
+        <EditText
+            android:id="@+id/urlText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:inputType="text"
+            android:maxLines="1"
+            tools:text="http://requestb.in"
+            android:textSize="16sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"

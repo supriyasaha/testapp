@@ -69,7 +69,7 @@ public class TriggerActionReceiver extends BroadcastReceiver {
             }
             else {
                 saveSmsToDatabaseForLaterUse(messageModel);
-                Toast.makeText(context, "SMS saved to draft", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Sorry, you don't have internet connection.SMS saved to draft", Toast.LENGTH_SHORT).show();
             }
         }
     }

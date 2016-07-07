@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GoodBox</string>
+    <string name="permission_read_message">"Please give the above permission to have access to your message"</string>
 </resources>

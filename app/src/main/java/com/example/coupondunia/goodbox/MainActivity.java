@@ -1,7 +1,11 @@
 package com.example.coupondunia.goodbox;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,10 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText messageNumber, messageBodyText, urlEditText;
     String msgNum, msgBody, urlBody;
+    public static int READ_SMS = 101;
 
     public static String MESSAGE_NUMBER = "number", MESSAGE_BODY = "body", URL = "url";
 
@@ -49,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        messageModel.message = "hfvwiuejfbwejf";
 //        messageModel.timestamp = System.currentTimeMillis();
 //        SmsReciever.generateTriggerNotification(this, messageModel);
+
+        getPermission();
     }
 
     public void saveTriggerDetailsToSharedPreference() {
@@ -73,4 +83,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    private void getPermission() {
+        String message = "";
+        final List<Integer> permissionGr = new ArrayList<>();
+
+        if (!PermissionUtil.isPermissionGranted(this, Manifest.permission.READ_SMS)) {
+            permissionGr.add(READ_SMS);
+            message += "<p></p><b>SMS</b><p>" + getString(R.string.permission_read_message) + "</p>";
+        }
+
+        if (permissionGr.size() > 0) {
+            showPermissionDialog(message);
+        }
+    }
+
+    private void showPermissionDialog(final String message) {
+        PermissionUtil.showRequestPermissionDialog(this, message, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {//allow
+                getPermission(READ_SMS, Manifest.permission.READ_SMS);
+            }
+        }, new DialogInterface.OnClickListener() {//cancel
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                showMandatoryPermissionDialog(message);
+            }
+        });
+    }
+
+    public void getPermission(int phonePermission, String... permissionGroups) {
+        String p[] = new String[permissionGroups.length];
+        int i = 0;
+        for (String perms : permissionGroups) {
+            p[i++] = perms;
+        }
+        ActivityCompat.requestPermissions(this, p, phonePermission);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (PermissionUtil.isPermissionGranted(this, Manifest.permission.READ_SMS)) {
+//            onCaptureBillImage();
+        }
+        else {
+            showMandatoryPermissionDialog("This permission is necessary for the app");
+        }
+    }
+
+    private void showMandatoryPermissionDialog(String alertText) {
+        PermissionUtil.showMandatoryPermissionDialog(this, alertText, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {//allow
+                getPermission(READ_SMS, Manifest.permission.READ_SMS);
+            }
+        }, new DialogInterface.OnClickListener() {//cancel
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                MainActivity.this.finish();//exit the app
+            }
+        });
+    }
+
 }

@@ -1,8 +1,8 @@
 package com.example.coupondunia.goodbox;
 
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        messageModel.message = "hfvwiuejfbwejf";
 //        messageModel.timestamp = System.currentTimeMillis();
 //        SmsReciever.generateTriggerNotification(this, messageModel);
-
     }
 
     public void saveTriggerDetailsToSharedPreference() {

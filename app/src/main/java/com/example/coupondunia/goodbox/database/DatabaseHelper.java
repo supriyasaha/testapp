@@ -9,13 +9,13 @@ import com.example.coupondunia.goodbox.GoodBoxApplication;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE = "quirk.db";
+    public static final String DATABASE = "sms.db";
     public static final int DATABASE_VERSION = 2;
     public static final int BILL_STATUS_DRAFT = 0;
     public static final int BILL_STATUS_UPLOADED = 1;
 
 
-    private static final String QUIRK_CREATE_TABLE_CARDS =
+    private static final String SMS_OFFLINE_TABLE =
             "CREATE TABLE IF NOT EXISTS " + SMSOfflineDatabase.SMSTable.TABLE_NAME + " ("
                     + SMSOfflineDatabase.SMSTable.ENTRY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
                     + SMSOfflineDatabase.SMSTable.SMS_DATA + " TEXT"
@@ -36,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(QUIRK_CREATE_TABLE_CARDS);
+        db.execSQL(SMS_OFFLINE_TABLE);
     }
 
     @Override

@@ -21,7 +21,7 @@ public class RestClient {
     public static final int SOCKET_TIMEOUT = 25;
     private static String BASE_URL = "http://requestb.in/";
 
-    private static SMSService quirkService;
+    private static SMSService service;
 
     public static Retrofit retrofit;
     public static OkHttpClient okClient;
@@ -71,11 +71,11 @@ public class RestClient {
 
 
         retrofit = builder.build();
-        quirkService = retrofit.create(SMSService.class);
+        service = retrofit.create(SMSService.class);
     }
 
     public static SMSService get() {
-        return quirkService;
+        return service;
     }
 
     public static String getBaseUrl() {

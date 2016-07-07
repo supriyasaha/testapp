@@ -63,7 +63,7 @@ public class TriggerActionReceiver extends BroadcastReceiver {
 
                     @Override
                     public void onFailure(int httpCode, String httpMessage) {
-                        saveSmsToDatabaseForLaterUse(messageModel);
+//                        saveSmsToDatabaseForLaterUse(messageModel);
                     }
                 });
             }
@@ -84,5 +84,7 @@ public class TriggerActionReceiver extends BroadcastReceiver {
         ContentValues values = new ContentValues();
         values.put(SMSOfflineDatabase.SMSTable.SMS_DATA, json);
         db.insert(SMSOfflineDatabase.SMSTable.TABLE_NAME, null, values);
+
+        //TODO start a intent service from here to send batched data to server
     }
 }
